@@ -11,7 +11,8 @@
     color: red;
     border: 1px solid green
   }
-  .parent{
+
+  .parent {
     border: 1px solid #000
   }
 </style>
@@ -19,6 +20,7 @@
 <div id="root"></div>
 <script>
 	let number = 0;
+	let h = React.createElement
 
 	let onClickAdd = () => {
 		number += 1;
@@ -32,11 +34,12 @@
 	render()
 
 	function render() {
-		let h = React.createElement
-		let span = h('span', {className: 'red'}, number);
-		let addButton = h('button', {onClick: onClickAdd}, '+');
-		let minusButton = h('button', {onClick: onClickMinus}, '-');
-		let div = h('div', {className: 'parent'}, span, addButton, minusButton);
+
+		let div = h('div', {className: 'parent'},
+			h('span', {className: 'red'}, number),
+			h('button', {onClick: onClickAdd}, '+'),
+			h('button', {onClick: onClickMinus}, '-')
+		);
 		ReactDOM.render(div, document.querySelector('#root'));
 	}
 </script>
