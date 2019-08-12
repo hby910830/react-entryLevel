@@ -14,6 +14,7 @@
 <body>
 <div id="root"></div>
 <button id="add">+</button>
+<button id="minus">-</button>
 <script>
 	let number = 0;
 	let span = React.createElement('span', {className: 'red'}, number);
@@ -21,9 +22,15 @@
 	ReactDOM.render(span, document.querySelector('#root'));
 
 	let add = document.querySelector('#add');
+	let minus = document.querySelector('#minus');
 
 	add.onclick = () => {
 		number += 1;
+		let span = React.createElement('span', {className: 'red'}, number)
+		ReactDOM.render(span, document.querySelector('#root'));
+	}
+	minus.onclick = () => {
+		number -= 1;
 		let span = React.createElement('span', {className: 'red'}, number)
 		ReactDOM.render(span, document.querySelector('#root'));
 	}
