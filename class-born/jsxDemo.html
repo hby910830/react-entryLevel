@@ -22,7 +22,6 @@
 
 <script type="text/babel">
 	let number = 0;
-	// let h = React.createElement
 
 	let onClickAdd = () => {
 		number += 1;
@@ -33,31 +32,43 @@
 		render()
 	}
 
-	render()
-
-	function render() {
-
-		// let div = h('div', {className: 'parent'},
-		// 	h('span', {className: 'red'}, number),
-		// 	h('button', {onClick: onClickAdd}, '+'),
-		// 	h('button', {onClick: onClickMinus}, '-')
-		// );
-
-		/*
-        let div = <div class="parent">
-          <span class="red">{number}</span>
-          <button onClick={onClickAdd}>+</button>
-          <button onClick={onClickMinus}>-</button>
-        </div>
-
-        ReactDOM.render(div, document.querySelector('#root'));*/
-
-		ReactDOM.render(
+	function Box1(obj){
+		return (
 			<div className="parent">
+				{name.name}
 				<span className="red">{number}</span>
 				<button onClick={onClickAdd}>+</button>
 				<button onClick={onClickMinus}>-</button>
-			</div>,
+			</div>
+    )
+  }
+
+  function Box2(obj){  //obj父元素给子元素传参
+		return (
+			<div className="parent">
+        {name.name} <!--子元素通过对象获取父元素传过来的属性-->
+				<span className="red">{number}</span>
+				<button onClick={onClickAdd}>+</button>
+				<button onClick={onClickMinus}>-</button>
+			</div>
+    )
+  }
+
+	function App(){
+		return (
+			<div>
+				<Box1 name="jack"/>  <!--obj父元素给子元素传参-->
+				<Box2 name="tom"/>
+      </div>
+		)
+	}
+
+
+	render()
+
+	function render() {
+		ReactDOM.render(
+			<App/>,
 			document.querySelector('#root')
     );
 	}
