@@ -1,6 +1,16 @@
 let money = {
 	amount: 100000
 }
+let fnLists = {}
+let eventHub = {
+	on(eventName, fn) {
+		fnLists[eventName] = fnLists[eventName] || []
+		fnLists[eventName].push(fn)
+	},
+	trigger(eventName, data) {
+		fnLists[eventName].forEach(fn => fn.call(null, data))
+	}
+}
 
 class App extends React.Component {
 	constructor() {
@@ -31,7 +41,7 @@ class BigPapa extends React.Component {
 	render() {
 		return (
 			<div className='papa'>
-				大爸
+				大爸 {this.state.money.amount}
 				<Son1/>
 				<Son2/>
 			</div>
@@ -50,7 +60,7 @@ class YoungPapa extends React.Component {
 	render() {
 		return (
 			<div className='papa'>
-				小爸
+				小爸 {this.state.money.amount}
 				<Son3/>
 				<Son4/>
 			</div>
@@ -69,7 +79,7 @@ class Son1 extends React.Component {
 	render() {
 		return (
 			<div className="son">
-				儿子1
+				儿子1 {this.state.money.amount}
 			</div>
 		)
 	}
@@ -83,10 +93,19 @@ class Son2 extends React.Component {
 		}
 	}
 
+	minus() {
+		money.amount -= 100
+		this.setState({
+			money
+		})
+		eventHub.trigger('我花钱了', 100)
+	}
+
 	render() {
 		return (
 			<div className="son">
-				儿子2
+				儿子2 {this.state.money.amount}
+				<button onClick={this.minus.bind(this)}>消费100</button>
 			</div>
 		)
 	}
@@ -98,12 +117,17 @@ class Son3 extends React.Component {
 		this.state = {
 			money
 		}
+		eventHub.on('我花钱了', () => {
+			this.setState({
+				money
+			})
+		})
 	}
 
 	render() {
 		return (
 			<div className="son">
-				儿子3
+				儿子3 {this.state.money.amount}
 			</div>
 		)
 	}
@@ -121,7 +145,7 @@ class Son4 extends React.Component {
 	render() {
 		return (
 			<div className="son">
-				儿子4
+				儿子4 {this.state.money.amount}
 			</div>
 		)
 	}
