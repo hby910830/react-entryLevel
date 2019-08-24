@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>react</title>
+  <script src="https://cdn.bootcss.com/react/16.9.0-rc.0/umd/react.production.min.js"></script>
+  <script src="https://cdn.bootcss.com/react-dom/16.9.0-alpha.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<style>
+  .red {
+    color: red;
+    border: 1px solid green
+  }
+
+  .parent {
+    border: 1px solid #000
+  }
+</style>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+	class Box1 extends React.Component {
+		constructor() {
+			super()
+			this.state = {
+				number: 0
+			}
+		}
+
+		onClickAdd() {
+			this.setState({
+				number: this.state.number + 1
+			})
+		}
+
+		onClickMinus() {
+			this.setState({
+				number: this.state.number - 1
+			})
+		}
+
+		render() {
+			return (
+				<div className="parent">
+					{this.props.name}
+					<span className="red">{this.state.number}</span>
+					<button onClick={this.onClickAdd.bind(this)}>+1</button>
+					<button onClick={this.onClickMinus.bind(this)}>-1</button>
+				</div>
+			)
+		}
+	}
+
+	class Box2 extends React.Component {
+		constructor(props) {
+			super(props)
+			this.state = {
+				number: 0
+			}
+		}
+
+		onClickAdd() {
+			this.setState({
+				number: this.state.number + 2
+			})
+		}
+
+		onClickMinus() {
+			this.setState({
+				number: this.state.number - 2
+			})
+		}
+
+		render() {  //局部render
+			return (
+				<div className="parent">
+					{this.props.name}{this.props.age}
+					<span className="red">{this.state.number}</span>
+					<button onClick={this.onClickAdd.bind(this)}>+2</button>
+					<button onClick={this.onClickMinus.bind(this)}>-2</button>
+				</div>
+			)
+		}
+	}
+
+	function App(props) {
+		/*父元素通过标签的属性给子元素传参*/
+		return (
+			<div>
+        {props.name}
+				<Box1 name="jack"/>
+				<Box2 name="tom" age="18"/>
+			</div>
+		)
+	}
+
+
+	ReactDOM.render(
+		<App name="parent"/>,
+		document.querySelector('#root')
+	);
+</script>
+</body>
+</html>
