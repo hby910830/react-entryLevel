@@ -22,6 +22,7 @@
 
 <script type="text/babel">
 	let number = 0;
+	let number1 = 0
 
 	let onClickAdd = () => {
 		number += 1;
@@ -31,8 +32,16 @@
 		number -= 1;
 		render()
 	}
+	let onClickAdd1 = () => {
+		number1 += 1;
+		render()
+	}
+	let onClickMinus1 = () => {
+		number1 -= 1;
+		render()
+	}
 
-	function Box1(obj){
+	function Box1(obj) {
 		return (
 			<div className="parent">
 				{name.name}
@@ -40,26 +49,28 @@
 				<button onClick={onClickAdd}>+</button>
 				<button onClick={onClickMinus}>-</button>
 			</div>
-    )
-  }
+		)
+	}
 
-  function Box2(obj){  //obj父元素给子元素传参
+	function Box2(obj) {  //obj子元素接受父元素给的参数
+		/*子元素通过obj对象获取父元素传过来的属性*/
 		return (
 			<div className="parent">
-        {name.name} <!--子元素通过对象获取父元素传过来的属性-->
-				<span className="red">{number}</span>
-				<button onClick={onClickAdd}>+</button>
-				<button onClick={onClickMinus}>-</button>
+				{name.name}
+				<span className="red">{number1}</span>
+				<button onClick={onClickAdd1}>+</button>
+				<button onClick={onClickMinus1}>-</button>
 			</div>
-    )
-  }
+		)
+	}
 
-	function App(){
+	function App() {
+		/*父元素通过标签的属性给子元素传参*/
 		return (
 			<div>
-				<Box1 name="jack"/>  <!--obj父元素给子元素传参-->
+				<Box1 name="jack"/>
 				<Box2 name="tom"/>
-      </div>
+			</div>
 		)
 	}
 
@@ -70,7 +81,7 @@
 		ReactDOM.render(
 			<App/>,
 			document.querySelector('#root')
-    );
+		);
 	}
 </script>
 </body>
