@@ -30,18 +30,39 @@
         你点击了 <span id="value">${store.getState()}</span> 次
         <div>
           <button id="add1" onclick="add1()">+1</button>
-          <button id="minu1">-1</button>
-          <button id="add1IfOdd">如果是单数就+1</button>
-          <button id="addAfter2Sec">两秒钟后+1</button>
+          <button id="add1" onclick="add2()">+2</button>
+          <button id="minu1" onclick="minus()">-1</button>
+          <button id="add1IfOdd" onclick="addIfOdd()">如果是单数就+1</button>
+          <button id="addAfter2Sec" onclick="addAsync()">两秒钟后+1</button>
         </div>
      </div>
     `
 	}
 
-	function add1(){
+	function add1() {
 		// 1.dispatch 一个 action
-    // 派发一个事件 === 触发一个事件
-		store.dispatch({type: 'add'})
+		// 派发一个事件 === 触发一个事件
+		store.dispatch({type: 'add', payload: 1})
+	}
+
+	function add2() {
+		store.dispatch({type: 'add', payload: 2})
+	}
+
+	function minus() {
+		store.dispatch({type: 'minus'})
+	}
+
+	function addIfOdd() {
+		if (store.getState() % 2 !== 0) {
+			store.dispatch({type: 'add', payload: 1})
+		}
+	}
+
+	function addAsync() {
+		setTimeout(() => {
+			store.dispatch({type: 'add', payload: 1})
+		}, 2000)
 	}
 
 	function stateChanger(state, action) {
@@ -49,10 +70,11 @@
 		if (state === undefined) {
 			return 0
 		} else {
-			console.log(action.type)
 			switch (action.type) {
 				case 'add':
-					return state + 1 // 2. 根据操作生成新的 state 触发一个事件
+					return state + action.payload // 2. 根据操作生成新的 state 触发一个事件
+				case 'minus':
+					return state - 1
 				default:
 					return state
 			}
@@ -61,7 +83,7 @@
 
 	let store = Redux.createStore(stateChanger)
 	render(store)
-  store.subscribe(() => render(store))  // 3. 接受到事件，重新render
+	store.subscribe(() => render(store))  // 3. 接受到事件，重新render
 </script>
 </body>
 </html>
