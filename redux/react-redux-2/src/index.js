@@ -12,9 +12,13 @@ const stateChanger = (state, action) => {
 	} else {
 		switch (action.type) {
 			case 'add':
-				return state + action.payload // 2. 根据操作生成新的 state 触发一个事件
+				return {
+					n: state.n + action.payload
+				} // 2. 根据操作生成新的 state 触发一个事件
 			case 'minus':
-				return state - 1
+				return {
+					n: state.n - 1
+				}
 			default:
 				return state
 		}
