@@ -27,8 +27,8 @@ let eventHub = {
 
 let manager = { //管家，统一管理状态的变化
 	init() {
-		eventHub.on('我花钱了', data => {
-			money.amount -= data
+		eventHub.on('我花钱了', data => {  //subscribe
+			store.money.amount -= data  //reducer
 			render()
 		})
 	}
@@ -105,7 +105,7 @@ class Son2 extends React.Component {
 	}
 
 	minus() {
-		eventHub.trigger('我花钱了', 100)
+		eventHub.trigger('我花钱了', 100) ////eventName--action(type)   data--payload
 	}
 
 	render() {
