@@ -1,36 +1,53 @@
-//redux
-let createStore = Redux.createStore
-let reducers = (state/* = {money: {amount: 100000}}*/, action) => {
-	state = state || {
-		money: {amount: 100000}
-	}
-	switch (action.type) {
-		case '我花钱了':
-			return {
-				money: {
-					amount: state.money.amount - action.payload
-				}
-			}
-		default:
-			return state
+//数据
+let money = {
+	amount: 100000
+}
+let user = {
+	id: 123,
+	nickName: '土豪'
+}
+
+let store = {
+	money,
+	user
+}
+
+
+//eventHub
+let fnLists = {}
+let eventHub = {
+	on(eventName, fn) {
+		fnLists[eventName] = fnLists[eventName] || []
+		fnLists[eventName].push(fn)
+	},
+	trigger(eventName, data) {
+		fnLists[eventName].forEach(fn => fn.call(null, data))
 	}
 }
-const store = createStore(reducers)
 
+let manager = { //管家，统一管理状态的变化
+	init() {
+		eventHub.on('我花钱了', data => {  //subscribe
+			store.money.amount -= data  //reducer
+			render()
+		})
+	}
+}
+manager.init()
 
 class App extends React.Component {
 	constructor() {
 		super()
-		// this.state = {
-		// 	store: store.getState()
-		// }
+		this.state = {
+			store
+		}
 	}
 
 	render() {
 		return (
 			<div className='root'>
-				<BigPapa money={this.props.store.money.amount}/>
-				<YoungPapa money={this.props.store.money.amount}/>
+				<BigPapa money={this.state.store.money.amount}/>
+				<YoungPapa money={this.state.store.money.amount}/>
 			</div>
 		)
 	}
@@ -88,8 +105,7 @@ class Son2 extends React.Component {
 	}
 
 	minus() {
-		// eventHub.trigger('我花钱了', 100)  //action
-		store.dispatch({type: '我花钱了', payload: 100})
+		eventHub.trigger('我花钱了', 100) ////eventName--action(type)   data--payload
 	}
 
 	render() {
@@ -133,10 +149,9 @@ class Son4 extends React.Component {
 
 function render() {
 	ReactDOM.render(
-		<App store={store.getState()}/>,
+		<App/>,
 		document.querySelector('#app')
 	)
 }
 
 render()
-store.subscribe(render)
