@@ -1,12 +1,49 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+function F1(props) {
+	return <div>
+		1111,	{props.n1}
+		<F2 n2={props.n1}/>
+	</div>
+}
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+function F2(props) {
+	return <div>
+		2222,	{props.n2}
+		<F3 n3={props.n2}/>
+	</div>
+}
+
+function F3(props) {
+	return <div>
+		3333,	{props.n3}
+		<F4 n4={props.n3}/>
+	</div>
+}
+
+function F4(props) {
+	return <div>4444,	{props.n4}</div>
+}
+
+class App extends React.Component{
+	constructor(){
+		super()
+		this.state = {
+			n: 99
+		}
+	}
+	render(){
+		return (
+			<div>
+				<F1 n1={this.state.n}/>
+			</div>
+		)
+	}
+}
+
+ReactDOM.render(<App/>, document.getElementById('root'));
+
 serviceWorker.unregister();
