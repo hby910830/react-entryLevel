@@ -3,30 +3,34 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-function F1(props) {
-	return <div>
-		1111,	{props.n1}
-		<F2 n2={props.n1}/>
+function F1() {
+	return <div className="bordered">
+		1111
+		<F2/>
 	</div>
 }
 
-function F2(props) {
-	return <div>
-		2222,	{props.n2}
-		<F3 n3={props.n2}/>
+function F2() {
+	return <div className="bordered">
+		2222
+		<F3/>
 	</div>
 }
 
-function F3(props) {
-	return <div>
-		3333,	{props.n3}
-		<F4 n4={props.n3}/>
+function F3() {
+	return <div className="bordered">
+		3333,
+		<nContext.Consumer>
+			{n => <F4 n4={n}/> }
+		</nContext.Consumer>
 	</div>
 }
 
 function F4(props) {
-	return <div>4444,	{props.n4}</div>
+	return <div className="bordered">4444,{props.n4}</div>
 }
+
+const nContext = React.createContext()
 
 class App extends React.Component{
 	constructor(){
@@ -37,9 +41,9 @@ class App extends React.Component{
 	}
 	render(){
 		return (
-			<div>
-				<F1 n1={this.state.n}/>
-			</div>
+			<nContext.Provider value="22">
+				<F1/>
+			</nContext.Provider>
 		)
 	}
 }
