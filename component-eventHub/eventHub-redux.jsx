@@ -105,7 +105,7 @@ class Son2 extends React.Component {
 	}
 
 	minus() {
-		eventHub.trigger('我花钱了', 100) ////eventName--action(type)   data--payload
+		eventHub.trigger('我花钱了', 100) //eventName--action(type)   data--payload
 	}
 
 	render() {
