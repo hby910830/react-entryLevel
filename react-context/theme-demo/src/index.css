@@ -1,0 +1,11 @@
+.app {
+   text-align: center;
+}
+
+.box.red {
+    border: 1px solid red
+}
+
+.box.green {
+  border: 1px solid green
+}
