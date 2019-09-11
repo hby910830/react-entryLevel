@@ -8,17 +8,31 @@ class App2 extends React.Component {
 	constructor() {
 		super()
 		this.state = {
-			count: 10
+			count: 10,
+			user: {
+				name: '韩宝亿',
+				age: 18
+			}
 		}
 	}
-	add = () =>{
+
+	add = () => {
 		this.setState({
 			count: this.state.count + 1
 		})
 	}
-	minus = () =>{
+	minus = () => {
 		this.setState({
 			count: this.state.count - 1
+		})
+	}
+	older = () => {
+		this.setState({
+			...this.state,
+			user: {
+				name: this.state.user.name,
+				age: this.state.user.age + 1
+			}
 		})
 	}
 
@@ -27,8 +41,10 @@ class App2 extends React.Component {
 			<div>
 				APP2
 				<div>{this.state.count}</div>
+				<div>{this.state.user.name},{this.state.user.age}岁</div>
 				<button onClick={this.add}>+1</button>
 				<button onClick={this.minus}>-1</button>
+				<button onClick={this.older}>变老</button>
 			</div>
 		)
 	}
@@ -36,8 +52,11 @@ class App2 extends React.Component {
 
 //App1可以完全替代App2
 function App1() {
+	// Hooks can only be called inside the body of a function component.
 	const [count/*值*/, setCount/*更新函数*/] = useState(10)
 	console.log(useState(10)); //[10, ƒ]
+
+	const [user, setUser] = useState({name: '韩宝亿', age: 18})
 
 	const add = () => {
 		setCount(count + 1)
@@ -45,21 +64,29 @@ function App1() {
 	const minus = () => {
 		setCount(count - 1)
 	}
+	const older = () => {
+		setUser({
+			...user,
+			age: user.age + 1
+		})
+	}
 
 	return (
 		<div>
 			APP1
 			<div>{count}</div>
+			<div>{user.name}, {user.age}岁</div>
 			<div>
 				<button onClick={add}>+1</button>
 				<button onClick={minus}>-1</button>
+				<button onClick={older}>变老</button>
 			</div>
 		</div>
 	)
 }
 
-function App(){
-	return(
+function App() {
+	return (
 		<div>
 			<App1/>
 			<hr/>
