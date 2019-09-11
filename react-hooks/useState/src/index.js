@@ -56,7 +56,7 @@ function App1() {
 	const [count/*值*/, setCount/*更新函数*/] = useState(10)
 	console.log(useState(10)); //[10, ƒ]
 
-	const [user, setUser] = useState({name: '韩宝亿', age: 18})
+	const [user, setUser] = useState({name: '韩宝亿', age: 18, hobbies: ['lol', 'dog', 'code']})
 
 	const add = () => {
 		setCount(count + 1)
@@ -70,16 +70,24 @@ function App1() {
 			age: user.age + 1
 		})
 	}
+	const addHobby = () => {
+		let newHobby = parseInt(Math.random() * 10 + 1)
+		setUser({
+			...user,
+			hobbies: [...user.hobbies, newHobby]
+		})
+	}
 
 	return (
 		<div>
 			APP1
 			<div>{count}</div>
-			<div>{user.name}, {user.age}岁</div>
+			<div>{user.name}, {user.age}岁, 爱好: {user.hobbies.join(',')}</div>
 			<div>
 				<button onClick={add}>+1</button>
 				<button onClick={minus}>-1</button>
 				<button onClick={older}>变老</button>
+				<button onClick={addHobby}>增加爱好</button>
 			</div>
 		</div>
 	)
