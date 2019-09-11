@@ -1,5 +1,5 @@
 //用了hooks以后，react的无状态函数组件就可以不用写成class APP extends React.Component就能获取状态和属性方法
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
@@ -52,11 +52,17 @@ class App2 extends React.Component {
 
 //App1可以完全替代App2
 function App1() {
-	// Hooks can only be called inside the body of a function component.
+	/*Hooks can only be called inside the body of a function component.*/
 	const [count/*值*/, setCount/*更新函数*/] = useState(10)
 	console.log(useState(10)); //[10, ƒ]
 
 	const [user, setUser] = useState({name: '韩宝亿', age: 18, hobbies: ['lol', 'dog', 'code']})
+
+
+	/*Effect Hook 可以让你在函数组件中执行副作用操作*/
+	useEffect(() => {
+		document.getElementById('output').innerText = count
+	})
 
 	const add = () => {
 		setCount(count + 1)
