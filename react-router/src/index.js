@@ -17,15 +17,17 @@ function Box2() {
 }
 
 function App() {
-	let [ui, setUi] = useState('登录')
+	let hash = window.location.hash
+	let initUi = hash === '#signUp' ? '注册' : '登录'
+	let [ui, setUi] = useState(initUi)
 	let onClickLogin = () => {
 		setUi('登录')
-		window.location.hash = '登录'
+		window.location.hash = 'login'
 	}
 
 	let onClickSignUp = () => {
 		setUi('注册')
-		window.location.hash = '注册'
+		window.location.hash = 'signUp'
 	}
 	return (
 		<div className='app'>
