@@ -18,8 +18,15 @@ function Box2() {
 
 function App() {
 	let [ui, setUi] = useState('登录')
-	let onClickLogin = () => setUi('登录')
-	let onClickSignUp = () => setUi('注册')
+	let onClickLogin = () => {
+		setUi('登录')
+		window.location.hash = '登录'
+	}
+
+	let onClickSignUp = () => {
+		setUi('注册')
+		window.location.hash = '注册'
+	}
 	return (
 		<div className='app'>
 			<button onClick={onClickLogin}>登录</button>
