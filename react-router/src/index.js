@@ -17,12 +17,14 @@ function Box2() {
 }
 
 function App() {
-	let [n, setN] = useState(0)
+	let [ui, setUi] = useState('登录')
+	let onClickLogin = () => setUi('登录')
+	let onClickSignUp = () => setUi('注册')
 	return (
 		<div className='app'>
-			<button onClick={() => setN(0)}>登录</button>
-			<button onClick={() => setN(1)}>注册</button>
-			<div>{n % 2 === 0 ? <Box1/> : <Box2/>}</div>
+			<button onClick={onClickLogin}>登录</button>
+			<button onClick={onClickSignUp}>注册</button>
+			<div>{ui === '登录' ? <Box1/> : <Box2/>}</div>
 		</div>
 	)
 }
