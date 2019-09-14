@@ -17,17 +17,26 @@ function Box2() {
 }
 
 function App() {
-	let hash = window.location.hash
-	let initUi = hash === '#signUp' ? '注册' : '登录'
-	let [ui, setUi] = useState(initUi)
+	// let hash = window.location.hash
+	// let pathname = window.location.pathname
+
+	// let initUi = hash === '#signUp' ? '注册' : '登录'
+	// let initUi = pathname === '/signUp' ? '注册' : '登录'
+
+	// let [ui, setUi] = useState(initUi)
+	let [ui, setUi] = useState('登录')
 	let onClickLogin = () => {
 		setUi('登录')
-		window.location.hash = 'login'
+		// window.location.hash = 'login'	 		//页面不会刷新
+		// window.location.pathname = 'login' //页面会刷新
+		window.history.pushState(null, '', 'login') //页面不会刷新,但是需要后端配合把不存在的路由引向某一个页面
 	}
 
 	let onClickSignUp = () => {
 		setUi('注册')
-		window.location.hash = 'signUp'
+		// window.location.hash = 'signUp'   //页面不会刷新
+		// window.location.pathname = 'signUp'	 //页面会刷新
+		window.history.pushState(null, '', 'signUp') //页面不会刷新,但是需要后端配合把不存在的路由引向某一个页面
 	}
 	return (
 		<div className='app'>
