@@ -1,0 +1,12 @@
+.app {
+   text-align: center;
+}
+
+.box {
+    height: 100px;
+    margin: 20px;
+    box-shadow: 0 0 5px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
