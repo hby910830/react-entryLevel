@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 
 function Box1() {
 	return (
-		<div className='box'>登陆</div>
+		<div className='box'>登录</div>
 	)
 }
 
@@ -20,7 +20,8 @@ function App() {
 	let [n, setN] = useState(0)
 	return (
 		<div className='app'>
-			{n}<button onClick={() => setN(n + 1)}>切换状态</button>
+			<button onClick={() => setN(0)}>登录</button>
+			<button onClick={() => setN(1)}>注册</button>
 			<div>{n % 2 === 0 ? <Box1/> : <Box2/>}</div>
 		</div>
 	)
