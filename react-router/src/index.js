@@ -18,13 +18,14 @@ function Box2() {
 
 function App() {
 	// let hash = window.location.hash
-	// let pathname = window.location.pathname
+	let pathname = window.location.pathname
 
 	// let initUi = hash === '#signUp' ? '注册' : '登录'
-	// let initUi = pathname === '/signUp' ? '注册' : '登录'
+	let initUi = pathname === '/signUp' ? '注册' : '登录'
 
-	// let [ui, setUi] = useState(initUi)
-	let [ui, setUi] = useState('登录')
+	let [ui, setUi] = useState(initUi)
+	// let [ui, setUi] = useState('登录')
+
 	let onClickLogin = () => {
 		setUi('登录')
 		// window.location.hash = 'login'	 		//页面不会刷新
