@@ -49,6 +49,11 @@ class App extends React.Component {
 			n: this.state.n + 1
 		})
 	}
+	updateX() {
+		this.setState({
+			x: this.state.x + "!"
+		});
+	}
 
 	constructor() {
 		super()
@@ -62,6 +67,15 @@ class App extends React.Component {
 		console.log('将要mount App')
 	}
 
+	/*shouldComponentUpdate允许我们手动判断是否要进行组件更行，设置函数的合理返回值来避免不必要的更新,即用来做性能优化*/
+	shouldComponentUpdate(nextProps, nextState, nextContext) {
+		console.log('是否需要更新')
+		console.log(Object.keys(nextProps)) //wold
+		console.log(Object.keys(nextState.n))	//n
+		console.log(this.state.n);
+		return this.state.n !== nextState.n;
+	}
+
 	render() { //update
 		console.log('填充/更新App的内容')
 		return (
@@ -70,6 +84,7 @@ class App extends React.Component {
 				<br/>
 				我爸说{this.props.word}
 				<button onClick={this.addOne}>+1</button>
+				<button onClick={() => this.updateX()}>update x</button>
 			</div>
 		)
 	}
