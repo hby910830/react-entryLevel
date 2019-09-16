@@ -5,9 +5,40 @@
   <title>native-life-cycle</title>
 </head>
 <body>
-  <div id="app"></div>
-  <script>
-    
-  </script>
+<div id="app"></div>
+<script>
+	let app = document.querySelector('#app')
+
+  //create div 出现在内存里
+	let div = document.createElement('div')
+	div.style.border = '1px solid red'
+
+	let state = 0
+  //beforeMount
+	div.innerHTML = `
+      <p>${state}</p>
+      <button>+1</button>
+      <button>die</button>
+    `
+
+  //mount div 出现在页面里
+	app.appendChild(div)
+
+	document.querySelectorAll('button')[0].onclick = () => {
+		state += 1
+    //update div
+		document.querySelector('p').innerText = state
+	}
+
+	//destroy div
+	document.querySelectorAll('button')[1].onclick = () => {
+		document.querySelectorAll('button')[0].onclick = null
+		document.querySelectorAll('button')[1].onclick = null
+		div.remove()
+		console.log(div); //<div style="border: 1px solid red;">...</div>
+		div = null
+		console.log(div); //null
+	}
+</script>
 </body>
 </html>
