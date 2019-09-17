@@ -7,6 +7,7 @@ export default class Button extends React.Component {
 		this.state = {
 			active: false
 		}
+		this.myRef = React.createRef()
 	}
 
 	x() {
@@ -17,9 +18,9 @@ export default class Button extends React.Component {
 
 	render() {
 		return (
-			<button className='button2' onClick={this.x.bind(this)}>
+			<button ref={this.myRef} className='button2' onClick={this.x.bind(this)}>
 				{this.props.value}
-				{this.state.active ? <span>sss</span> : ''}
+				{this.state.active ? <span className='circle'/> : ''}
 			</button>
 		)
 	}
