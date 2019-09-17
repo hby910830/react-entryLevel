@@ -12,11 +12,11 @@ export default class Button extends React.Component {
 		this.myRef = React.createRef()
 	}
 
-	x(event) {
+	rippleAnimation(event) {
 		let {x, y} = this.myRef.current.getBoundingClientRect()
 		let {clientX, clientY} = event
-		let deltaX = clientX - x
-		let deltaY = clientY - y
+		let deltaX = clientX - x - 5
+		let deltaY = clientY - y - 5
 		this.setState({
 			active: true,
 			deltaX,
@@ -24,11 +24,22 @@ export default class Button extends React.Component {
 		})
 	}
 
+	animationEnd() {
+		this.setState({
+			active: false
+		})
+	}
+
 	render() {
 		return (
-			<button ref={this.myRef} className='button2' onClick={this.x.bind(this)}>
-				{this.props.value}
-				{this.state.active ? <span className='circle' style={{left: this.state.deltaX, top: this.state.deltaY,}}/> : ''}
+			<button ref={this.myRef} className='button2' onClick={this.rippleAnimation.bind(this)}>
+				<span className="value">{this.props.value}</span>
+				{
+					this.state.active ?
+						<span className='circle'
+									onAnimationEnd={this.animationEnd.bind(this)}
+									style={{left: this.state.deltaX, top: this.state.deltaY,}}/>
+						: ''}
 			</button>
 		)
 	}

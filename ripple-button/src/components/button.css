@@ -27,6 +27,12 @@
     z-index: 0;
 }
 
+.button2 > .value {
+    position: relative;
+    z-index: 1;
+}
+
+
 @keyframes big {
     0% {
         transform: scale(0.1);
