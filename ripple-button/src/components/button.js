@@ -10,7 +10,12 @@ export default class Button extends React.Component {
 		this.myRef = React.createRef()
 	}
 
-	x() {
+	x(event) {
+		let {x, y} = this.myRef.current.getBoundingClientRect()
+		let {clientX, clientY} = event
+		let deltaX = clientX - x
+		let deltaY = clientY - y
+		console.log(deltaX, deltaY);
 		this.setState({
 			active: true
 		})
