@@ -6,7 +6,9 @@ class App extends React.Component{
   render(){
     return (
       <div className="App">
-        <Button/>
+        <Button value="按钮1"/>
+        <Button value="按钮2"/>
+        <Button value="按钮3"/>
       </div>
     );
   }
