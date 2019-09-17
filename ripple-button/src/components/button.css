@@ -1,0 +1,11 @@
+.button2 {
+    box-sizing: border-box;
+    height: 32px;
+    background: #ffffff;
+    border: 1px solid rgba(153, 153, 153, 1);
+    border-radius: 4px;
+    padding: 4px 1em;
+    margin: 10px;
+    position: relative;
+    overflow: hidden;
+}
