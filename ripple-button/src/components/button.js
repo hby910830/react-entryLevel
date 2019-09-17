@@ -22,6 +22,8 @@ export default class Button extends React.Component {
 			deltaX,
 			deltaY
 		})
+		console.log('子组件的事件被调用了')
+		this.props.onClick && this.props.onClick.call(null, '来自子组件传递的参数')
 	}
 
 	animationEnd() {
