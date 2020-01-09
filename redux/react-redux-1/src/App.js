@@ -1,14 +1,10 @@
 import React from 'react';
 
 class App extends React.Component{
-
-	add1(){
-		this.props.store.dispatch({type: 'add', payload: 1})
-	}
-	add2(){
-		this.props.store.dispatch({type: 'add', payload: 2})	}
-	minus(){
-		this.props.store.dispatch({type: 'minus', payload: 1})	}
+	add1(){this.props.store.dispatch({type: 'add', payload: 1})}
+	add2(){this.props.store.dispatch({type: 'add', payload: 2})	}
+	minus(){this.props.store.dispatch({type: 'minus', payload: 1})}
+	
 	addIfOdd(){
 		if(this.props.value % 2 !== 0){
 			this.props.store.dispatch({type: 'add', payload: 1})
